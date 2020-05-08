@@ -1,6 +1,6 @@
-# vue-cart
+# VueKart
 
-> A Vue.js project
+> A Simple Vue Cart implementation supporting CRUD functionalities using Vue.
 
 ## Build Setup
 
