@@ -9,18 +9,18 @@ Vue.use(IconsPlugin);
 Vue.use(VueRouter);
 
 // The main page that gets served
-import Index from './Index.vue'
+import Index from './Index'
 
-import Home from './components/Home.vue'
-import Shop from './components/Shop.vue'
-import ViewProduct from './components/ViewProduct.vue'
-import Watch from './components/Watch.vue'
+import Home from './components/Home'
+import Shop from './components/Shop'
+import ViewProduct from './components/ViewProduct'
+import Watch from './components/Watch'
 
 const routes = [
   { path: '/', component: Home },
   { path: '/shop', component: Shop },
   { path: '/view/:id', component: ViewProduct },
-  { path: '/watch', component: Watch }
+  { path: '/watch', component: Watch },
 ];
 
 const router = new VueRouter({

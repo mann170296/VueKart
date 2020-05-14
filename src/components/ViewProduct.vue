@@ -103,11 +103,11 @@ export default {
         },
 
         addToWatch(id) {
-            this.$store.commit('addToWatch', { id });
+            this.$store.commit('addItemToWatch', { id });
         },
 
         removeFromWatch(id) {
-            this.$store.commit('removeFromWatch', { id });
+            this.$store.commit('removeItemFromWatch', { id });
         },
 
         appendCart() {

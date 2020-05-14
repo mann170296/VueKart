@@ -53,6 +53,10 @@ export const store = new Vuex.Store({
             return state.watchCount;
         },
 
+        getWatchListOfUser: state => {
+            state.watchData;
+        },
+
         getWatchList: state => {
             // Fetches the current Items in watch list of user
             state.watchData.forEach(itemID => {
@@ -73,6 +77,28 @@ export const store = new Vuex.Store({
     mutations: {
         addToCart: state => {
             state.cartCount += 1;
+        },
+
+        addItemToWatch: (state, { id }) => {
+            // check for exsitance
+            if(state.watchData.includes(id)) {
+                return;
+            }
+
+            state.watchData.push(id);
+            state.watchCount++;
+        },
+
+        removeItemFromWatch: (state, { id }) => {
+            if(state.watchData.includes(id)) {
+                // Remove from List
+                var getIndex = state.watchData.indexOf(id);
+                console.log("Removing item from watch list at position " + getIndex);
+                state.watchData.splice(getIndex, 1);
+                state.watchCount--;
+            } else {
+                return;
+            }
         },
 
         addToWatch: (state, { id }) => {

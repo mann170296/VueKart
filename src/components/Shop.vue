@@ -1,26 +1,31 @@
 <template>
     <div>
-        <partial-navbar></partial-navbar>
+        <app-navbar></app-navbar>
         <div class="container my-5">
             <div class="row">
-                <div class="col-md-4" v-for="game in getProducts" :key="game.id">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" :src="game.img" alt="Call of Duty" style="height: 350px;">
+                <div class="col-md-4" v-for="product in products" :key="product.id">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ product.name }}
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{game.name}}</h5>
-                            <p class="card-text">{{game.shortDesc}}</p>
+                            {{ product.shortDesc }}
                             <hr>
-                            <h4>{{game.price}}</h4>
+                            {{ product.description }}
                             <hr>
-                            <button class="btn btn-primary" v-b-tooltip.hover title="Add 1 to your cart"
-                                @click="appendCart" v-if="game.inStock">
+                            <h3>{{ product.price }}</h3>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-sm"
+                                    v-if="product.inStock">
                                 Add to Cart
                             </button>
-                            <router-link 
-                                class="btn btn-primary" 
-                                :to="/view/ + game.id" 
-                                v-b-tooltip.hover title="View Product details"
-                                :theData="game">
+                            <button class="btn btn-secondary btn-sm"
+                                    v-else disabled>
+                                Add to Cart
+                            </button>
+                            <router-link class="btn btn-info btn-sm"
+                                    :to="/view/ + product.id">
                                 View Product
                             </router-link>
                         </div>
@@ -32,29 +37,35 @@
 </template>
 
 <script>
-import Navbar from '../partials/Navbar';
+import Navbar from '../partials/Navbar'
 
 export default {
     components: {
-        'partial-navbar': Navbar
+        'appNavbar': Navbar
     },
-    name: 'Shop',
     data() {
         return {
-            baseURL: 'localhost:8080',
-        }
-    },
-
-    computed: {
-        getProducts() {
-            return this.$store.state.products;
+            products: this.$store.state.products,
         }
     },
 
     methods: {
-        appendCart() {
-            this.$store.commit('addToCart');
+        addItemToWatch(id) {
+            // Call the mutation
+            this.$store.commit('addItemToWatch', { id });
+        },
+
+        checkForWatchedProduct(id) {
+            if(this.$store.state.watchData.includes(id)) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        removeItemFromWatch(id) {
+            this.$store.commit('removeItemFromWatch', { id });
         }
-    }
+    },
 }
 </script>
